@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  apache:
+    image: httpd
+    ports:
+      - "8080:80"
+    volumes:
+      - ./php-files:/var/www/html
+    networks:
+      - lamp_network
+
+  mysql:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: poopypants
+    ports:
+      - "3306:3306"
+    networks:
+      - lamp_network
+
+
+  php:
+    image: php
+    volumes:
+      - ./php-files:/var/www/html
+    networks:
+      - lamp_network
+
+networks:
+  lamp_network:
